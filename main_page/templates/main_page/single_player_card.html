@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ player.name}} - 축구 DB</title>
+</head>
+<body>
+    <nav> <a href="/main_page/">돌아가기</a>  </nav>
+    <div>
+        <h1> {{player.name}}</h1>
+        <h3> 포지션: {{player.position }} 구단명: {{ player.team_name }}</h3>
+        <p> 패스 성공률: {{ player.pass_success_rate }} </p>
+        <p> 슛 성공률: {{player.shoot_success_rate}} </p>
+    </div>
+</body>
+</html>

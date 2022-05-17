@@ -17,5 +17,6 @@ from . import views
 from django.urls import path,include
 
 urlpatterns = [
-    path('', views.index)
+    path('', views.index),
+    path('<int:pk>/', views.single_player_card),
 ]

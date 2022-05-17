@@ -10,3 +10,15 @@ def index(request):
             'player': player,
         }
     )
+
+def single_player_card(request,pk):
+    player=Player.objects.get(pk = pk)
+
+    return render(
+        request,
+        'main_page/single_player_card.html',
+        {
+            'player':player
+        }
+    )
+

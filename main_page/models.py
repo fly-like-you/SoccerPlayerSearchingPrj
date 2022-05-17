@@ -9,4 +9,7 @@ class Player(models.Model):
 
     def __str__(self):
         return f'[{self.pk}] {self.name}'
+
+    def get_absolute_url(self):
+        return f'/main_page/{self.pk}/'
 # Create your models here.
