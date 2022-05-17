@@ -8,7 +8,7 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
         <div class="container">
             <a class="navbar-brand" href="#">DEPPO 프로젝트</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,12 +23,6 @@
                 <a class="nav-link" href="#">선수 검색</a>
                 </li>
             </ul>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Log in</a>
-                </li>
-
-            </ul>
         </div>
     </div>
       </nav>
@@ -37,21 +31,19 @@
             <div class="col-md-4 col-lg-3">
                 <!-- Categories widget-->
                 <div class="card mb-4">
-                    <div class="card-header">Categories</div>
+                    <div class="card-header">기능</div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-6">
                                 <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">Web Design</a></li>
-                                    <li><a href="#!">HTML</a></li>
-                                    <li><a href="#!">Freebies</a></li>
+                                    <li><a href="#!">선수 생성</a></li>
+                                    <li><a href="#!">선수 변경</a></li>
+                                    <li><a href="#!">선수 삭제</a></li>
                                 </ul>
                             </div>
                             <div class="col-sm-6">
                                 <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">JavaScript</a></li>
-                                    <li><a href="#!">CSS</a></li>
-                                    <li><a href="#!">Tutorials</a></li>
+
                                 </ul>
                             </div>
                         </div>
@@ -65,19 +57,22 @@
             </div>
             <div class="col-md-8 col-lg-9">
                 <!-- Card Post -->
-
                 <h1>Player List</h1>
+                <div class="row">
 {% for p in player_list %}
-            <div class="card mb-4">
-                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                <div class="card-body">
-                    <div class="small text-muted">January 1, 2022</div>
-                    <h2 class="card-title h4">{{ p.name }}</h2>
-                    <p class="card-text">{{p.position}} {{p.team_name}} {{ p.pass_success_rate }}</p>
-                    <a class="btn btn-primary" href="{{ p.get_absolute_url }}">Read more →</a>
-                </div>
-            </div>
+                    <div class="col-sm-3">
+                        <div style="width: 200px" class="card m-4">
+                            <a href="#!" ><img class="card-img-top"  src="{{ p.head_image.url }}" alt="..." /></a>
+                            <div class="card-body">
+                                <h2 class="card-title h4">{{ p.name }}</h2>
+                                <p class="card-text">포지션: {{p.position}} <br> 구단명: {{p.team_name}}</p>
+
+                                <a class="btn btn-primary" href="{{ p.get_absolute_url }}">상세 정보 →</a>
+                            </div>
+                        </div>
+                    </div>
 {% endfor%}
+                </div>
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                   <li class="page-item">

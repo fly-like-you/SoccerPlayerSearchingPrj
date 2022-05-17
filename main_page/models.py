@@ -7,6 +7,8 @@ class Player(models.Model):
     pass_success_rate = models.IntegerField()
     shoot_success_rate = models.IntegerField()
 
+    head_image = models.ImageField(upload_to='main_page/images/%Y/%m/%d', blank=True)
+
     def __str__(self):
         return f'[{self.pk}] {self.name}'
 
