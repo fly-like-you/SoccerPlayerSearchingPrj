@@ -18,6 +18,7 @@ from django.urls import path,include
 
 urlpatterns = [
     path('', views.CardList.as_view()), # CBV 방식
+    path('<int:pk>/', views.CardDetail.as_view()),
     #path('', views.index), FBV방식
     #path('<int:pk>/', views.single_player_card),
 ]

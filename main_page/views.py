@@ -1,15 +1,17 @@
 from django.shortcuts import render
 from .models import Player
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 #CBV 방식
 class CardList(ListView): # FBV방식의 index를 대체하는 클래스
     model = Player
     ordering = '-name'
 
+class CardDetail(DetailView):
+    model = Player
 
 # FBV 방식
-# def index(request):
+# def index(request):  ///class CardList로 대체
 #     player = Player.objects.all().order_by('-name')
 #     return render(
 #         request,
@@ -19,12 +21,12 @@ class CardList(ListView): # FBV방식의 index를 대체하는 클래스
 #         }
 #     )
 #
-# def single_player_card(request,pk):
+# def single_player_card(request,pk): ///class CardDetail 대체
 #     player=Player.objects.get(pk = pk)
 #
 #     return render(
 #         request,
-#         'main_page/single_player_card.html',
+#         'main_page/player_detail.html',
 #         {
 #             'player':player
 #         }
