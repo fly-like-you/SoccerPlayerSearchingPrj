@@ -130,4 +130,5 @@ dmypy.json
 
 #Pycharm
 .idea/
+migrations/
 .my_settings.py
