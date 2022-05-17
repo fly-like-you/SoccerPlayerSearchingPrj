@@ -17,6 +17,7 @@ from . import views
 from django.urls import path,include
 
 urlpatterns = [
-    path('', views.index),
-    path('<int:pk>/', views.single_player_card),
+    path('', views.CardList.as_view()), # CBV 방식
+    #path('', views.index), FBV방식
+    #path('<int:pk>/', views.single_player_card),
 ]

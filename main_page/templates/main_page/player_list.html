@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1> main page</h1>
-{% for p in player %}
+{% for p in player_list %}
     <a style="text-decoration: none;  color: gray;" href="{{ p.get_absolute_url }}"><div>
         <h3>이름: {{ p.name }}</h3>
         <h2>포지션: {{ p.position}}</h2>
