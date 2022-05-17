@@ -1,0 +1,16 @@
+<!Doctype html>
+<html lang = "ko">
+<head>
+    <meta charset = "UTF-8">
+    <title>Main page</title>
+</head>
+<body>
+    <h1> main page</h1>
+{% for p in player %}
+    <h3>이름: {{ p.name }}</h3>
+    <h2>포지션: {{ p.position}}</h2>
+    <p>구단명: {{ p.team_name }}</p>
+    <hr>
+{% endfor%}
+</body>
+</html>
