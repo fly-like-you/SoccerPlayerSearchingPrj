@@ -1,17 +1,55 @@
 from django.db import models
 
+class Team(models.Model): # 기존에서 팀id를 pk로 받겠습니다.
+    teamName = models.CharField(max_length=50)
+    coachName = models.CharField(max_length=10)
+    homeStadium = models.CharField(max_length=20)
+    region = models.CharField(max_length=10)
+    rank = models.IntegerField()
+
+    head_image = models.ImageField(upload_to='main_page/images/%Y/%m/%d', blank=True)
+
+    def __str__(self):
+        return self.teamName
+
+
+class Category(models.Model): # 팀별 카테고리 생성
+    categoryName = models.OneToOneField(Team, on_delete=models.CASCADE, related_name="organize", unique=True)  # 카테고리 이름
+    slug = models.SlugField(max_length=50, unique=True, allow_unicode=True) # slug 필드는 사람이 읽을 수 있는 텍스트로 고유 url을 만들때 사용
+
+    def __str__(self):
+        return str(self.categoryName)
+
+    class Meta:
+        verbose_name_plural = 'Categories' # 카테고리 이름 변경
+
+
+
+
+
 class Player(models.Model):
+
     name = models.CharField(max_length=10)
     position = models.CharField(max_length=5)
-    team_name = models.CharField(max_length=30)
     pass_success_rate = models.IntegerField()
     shoot_success_rate = models.IntegerField()
 
     head_image = models.ImageField(upload_to='main_page/images/%Y/%m/%d', blank=True)
+
+    team_name = models.ForeignKey(Team, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL, blank=True)        # 외래키키
 
     def __str__(self):
         return f'[{self.pk}] {self.name}'
 
     def get_absolute_url(self):
         return f'/main_page/{self.pk}/'
+
+
+
+
+
+
+
+
 # Create your models here.
