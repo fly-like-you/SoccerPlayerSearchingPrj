@@ -7,13 +7,18 @@
 
 {% for p in player_list %}
                     <div class="col-sm-3">
-                        <div style="width: 200px" class="card m-4">
+                        <div style="width: 200px" class="card m-4" id="card-{{ p.pk }}">
 {% if p.head_image %}
                             <a href="#!" ><img class="card-img-top"  src="{{ p.head_image.url }}" alt="{{ p }} head image" /></a>
 {% else %}
                             <img style="height: 264px" class = "card-img-top" src="https://portal.kleague.com/images/portal/img-nonepicture-userprofil.png">
 {% endif%}
                             <div class="card-body">
+{% if p.category %}
+                                <span class="badge badge-secondary float-right">{{ p.category }}</span>
+{% else %}
+                                <span class="badge badge-secondary float-right"> Unknown</span>
+{% endif %}
                                 <h2 class="card-title h4">{{ p.name }}</h2>
                                 <p class="card-text">포지션: {{p.position}} <br> 구단명: {{p.team_name}}</p>
 
