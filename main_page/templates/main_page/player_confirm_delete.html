@@ -1,0 +1,20 @@
+{% extends 'main_page/base_full_width.html' %}
+{% block head_title %} Delete Card - SoccerDB {% endblock %}
+
+{% block main_area %}
+    <h1> Delete player Card</h1>
+    <hr/>
+<!--
+    form태그는 기록한 값을 서버로 보냄 -enctype은 파일도 전송하겠다는 의미 원래는 action까지 처리해주어야하는데 장고는 알아서 처리해줌
+    csrf_token은 csrf공격으로부터 보호하기 위해 제공하는 기능
+-->
+    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+        <table>
+
+            <h1>정말로 {{ player.name }}을 삭제하실 건가요?</h1>
+        </table>
+        <button type="submit" class="btn btn-primary float-right">Submit</button>
+
+
+    </form>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'main_page/base_full_width.html' %}
+
+{% block head_title %} Team Lists - SoccerDB {% endblock %}
+
+{% block main_area %}
+<div class="container">
+    <h1> 팀 리스트</h1>
+
+
+    {% if team_list.exists%}
+        {% for t in team_list %}
+            {% if t.rank == 1%}
+        <div class="row">
+                <div class="col-lg-4"></div>
+                <div style="border:none" class="card m-4 col-lg-4 text-center" id="team-{{ t.pk }}">
+                {% if p.head_image %}
+                    <img class="card-img-top"  src="{{ t.head_image.url }}" alt="{{ t }} head image" /></a>
+                {% else %}
+                {% endif %}
+                    <div><img class="text-center" style="width:60px"src="https://cdn-icons-png.flaticon.com/512/3132/3132778.png"/></div>
+                    <div class="card-body">  {{ t.teamName }}</div>
+                </div>
+                <div class="col-lg-4"></div>
+        </div>
+                {% elif t.rank == 2 %}
+        <div class="row">
+                <div class="col-lg-2"></div>
+                <div style="border:none" class="card m-6 col-lg-4 text-center" id="team-{{ t.pk }}">
+                    <div><img class="text-center" style="width:60px"src="https://cdn-icons-png.flaticon.com/512/2583/2583319.png"/></div>
+                    <div class="card-body">  {{ t.teamName }}</div>
+                </div>
+                {% elif t.rank == 3 %}
+                <div style="border:none" class="card m-6 col-lg-4 text-center" id="team-{{ t.pk }}">
+                    <div><img class="text-center" style="width:60px"src="https://cdn-icons-png.flaticon.com/512/2583/2583434.png"/></div>
+                    <div class="card-body">  {{ t.teamName }}</div>
+                </div>
+                <div class="col-lg-2"></div>
+        </div>
+                {% else %}
+    <div class="row">
+                <div style="border:none" class="card m-4 col-lg-4" id="team-{{ t.pk }}">
+                    <div class="card-body">  {{ t.teamName }}</div>
+                </div>
+    </div>
+            {% endif %}
+        {% endfor %}
+
+
+
+
+
+    {% else %}
+        <h1> 팀 명단이 존재하지 않습니다... ㅠㅠ </h1>
+
+    {% endif%}
+
+</div>
+{% endblock %}

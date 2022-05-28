@@ -6,10 +6,42 @@
 {% endblock %}
     <nav> <a href="/main_page/">돌아가기</a>  </nav>
     <div>
-        <h1> {{player.name}}</h1>
-        <h3> 포지션: {{player.position }} 구단명: {{ player.team_name }}</h3>
+        {% if player.category %}
+            <span class="badge badge-secondary float-right"> {{ player.category }}</span>
+            {% else %}
+            <span class="badge badge-secondary float-right"> 미분류 </span>
+        {% endif %}
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h1> {{player.name}}</h1>
+                </div>
+                {% if player.head_image %}
+                <div class="col-lg-4">
+                    <img class="float-left" style="width:100px"src="{{ player.head_image.url }}" alt="{{ p }} head image">
+                </div>
+                {% else %}
+                <div class="col-lg-4">
+                    <img style="height: 264px" class = "card-img-top" src="https://portal.kleague.com/images/portal/img-nonepicture-userprofil.png">
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <hr/>
+        <a class="btn btn-info btn-sm float-right" href="/main_page/update_card/{{player.pk}}/" role="button">
+            <i class="fas fa-pen"> Edit Card</i>
+        </a>
+        <a class="btn btn-danger btn-sm float-right mr-3" href="/main_page/delete_card/{{player.pk}}/" role="button"> Delete Card</a>
+        <h3>포지션: {{player.position }}</h3>
+        <h3>구단명: {{ player.team_name }}</h3>
+        <p> 체중: {{ player.weight }}</p>
+        <p> 신장: {{ player.height }}</p>
+        <p> 국적: {{ player.nationality }}</p>
+        <p> 등번: {{ player.jersey_number }}</p>
         <p> 패스 성공률: {{ player.pass_success_rate }} </p>
         <p> 슛 성공률: {{player.shoot_success_rate}} </p>
+
+
     </div>
 
 {% endblock %}

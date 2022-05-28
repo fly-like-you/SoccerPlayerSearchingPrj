@@ -1,24 +1,29 @@
 {% extends 'main_page/base.html' %}
 {% block main_area %}
                 <!-- Card Post -->
+{% if category %}
+                <h1> {{ category }} </h1>
+{% else %}
                 <h1>Player List</h1>
+                <a href="/main_page/create_card/"><button type="button" class="btn btn-outline-primary btn-circle">선수 생성</button></a>
+{% endif %}
                 <div class="row">
 {% if player_list.exists %}
 
 {% for p in player_list %}
                     <div class="col-sm-3">
                         <div style="width: 200px" class="card m-4" id="card-{{ p.pk }}">
-{% if p.head_image %}
+    {% if p.head_image %}
                             <a href="#!" ><img class="card-img-top"  src="{{ p.head_image.url }}" alt="{{ p }} head image" /></a>
-{% else %}
+        {% else %}
                             <img style="height: 264px" class = "card-img-top" src="https://portal.kleague.com/images/portal/img-nonepicture-userprofil.png">
-{% endif%}
+    {% endif%}
                             <div class="card-body">
-{% if p.category %}
+    {% if p.category %}
                                 <span class="badge badge-secondary float-right">{{ p.category }}</span>
-{% else %}
+        {% else %}
                                 <span class="badge badge-secondary float-right"> Unknown</span>
-{% endif %}
+    {% endif %}
                                 <h2 class="card-title h4">{{ p.name }}</h2>
                                 <p class="card-text">포지션: {{p.position}} <br> 구단명: {{p.team_name}}</p>
 
@@ -31,21 +36,5 @@
                     <h3> 선수 명단이 존재하지 않습니다. </h3>
 {% endif%}
                 </div>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+
 {% endblock %}

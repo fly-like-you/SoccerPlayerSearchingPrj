@@ -20,6 +20,9 @@ class Category(models.Model): # 팀별 카테고리 생성
     def __str__(self):
         return str(self.categoryName)
 
+    def get_absolute_url(self):
+        return f'/main_page/category/{self.slug}/'
+
     class Meta:
         verbose_name_plural = 'Categories' # 카테고리 이름 변경
 
@@ -33,6 +36,12 @@ class Player(models.Model):
     position = models.CharField(max_length=5)
     pass_success_rate = models.IntegerField()
     shoot_success_rate = models.IntegerField()
+    height = models.IntegerField(default=170)
+    weight = models.IntegerField(default=60)
+    nationality = models.CharField(default="kor", max_length=10)
+    birthdate = models.DateField(blank=True, null=True, default='2000-01-01')
+    jersey_number = models.IntegerField(blank=True, null=True)
+
 
     head_image = models.ImageField(upload_to='main_page/images/%Y/%m/%d', blank=True)
 
