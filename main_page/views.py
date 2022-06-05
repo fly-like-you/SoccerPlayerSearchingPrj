@@ -6,7 +6,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 #CBV 방식
 class CardDelete(DeleteView):
     model = Player
-    success_url = '/main_page/'
+    success_url = '/main_page/' # 성공시 돌아갈 링크
 class CardUpdate(UpdateView):
     model = Player
     fields = [
@@ -15,6 +15,7 @@ class CardUpdate(UpdateView):
         'head_image','team_name', 'category'
     ]
     template_name = 'main_page/card_update_form.html'
+
 class CardCreate(CreateView):
     model = Player
     fields = [
@@ -30,7 +31,7 @@ class CardCreate(CreateView):
 class CardList(ListView): # FBV방식의 index를 대체하는 클래스
     model = Player
     ordering = '-name'
-
+    paginate_by = 12
     def get_context_data(self, **kwargs):
         context = super(CardList, self).get_context_data()  #오버라이딩
         context['categories'] = Category.objects.all() # 모든 카테고리를 가져와 키에 연결해담음
@@ -69,6 +70,7 @@ def category_page(request, slug):
 class TeamList(ListView): # FBV방식의 index를 대체하는 클래스
     model = Team
     ordering = 'rank'
+
 # FBV 방식
 # def index(request):  ///class CardList로 대체
 #     player = Player.objects.all().order_by('-name')

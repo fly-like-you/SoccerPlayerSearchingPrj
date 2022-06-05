@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Team(models.Model): # 기존에서 팀id를 pk로 받겠습니다.
     teamName = models.CharField(max_length=50)
     coachName = models.CharField(max_length=10)
@@ -8,10 +9,12 @@ class Team(models.Model): # 기존에서 팀id를 pk로 받겠습니다.
     rank = models.IntegerField()
 
     head_image = models.ImageField(upload_to='main_page/images/%Y/%m/%d', blank=True)
-
+    category = models.ForeignKey("Category", null=True, on_delete=models.SET_NULL, blank=True,db_column='slug')        # 외래키키
     def __str__(self):
         return self.teamName
 
+    def get_absolute_url(self):
+        return f'/main_page/category/{self.category.slug}/'
 
 class Category(models.Model): # 팀별 카테고리 생성
     categoryName = models.OneToOneField(Team, on_delete=models.CASCADE, related_name="organize", unique=True)  # 카테고리 이름
@@ -53,12 +56,3 @@ class Player(models.Model):
 
     def get_absolute_url(self):
         return f'/main_page/{self.pk}/'
-
-
-
-
-
-
-
-
-# Create your models here.
