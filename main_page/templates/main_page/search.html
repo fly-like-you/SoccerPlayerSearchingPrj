@@ -1,0 +1,44 @@
+{% extends 'main_page/base_full_width.html' %}
+{% block head_title %} Search Card - SoccerDB {% endblock %}
+
+{% block main_area %}
+    <h1>Search your Player!</h1>
+    <form method="get"  action="{% url "player:search" %}">
+        {{form}}
+<br>
+        <button class="btn btn-outline-primary btn-circle">Search</button>
+    </form>
+<div class="spinner-border" role="status">
+  <span class="visually-hidden"></span>
+</div>
+                <div class="row">
+{% if player %}
+{% for p in player %}
+                    <div class="col-sm-3">
+                        <div style="width: 200px" class="card m-4" id="card-{{ p.pk }}">
+    {% if p.head_image %}
+                            <a href="#!" ><img class="card-img-top"  src="{{ p.head_image.url }}" alt="{{ p }} head image" /></a>
+        {% else %}
+                            <img style="height: 264px" class = "card-img-top" src="https://portal.kleague.com/images/portal/img-nonepicture-userprofil.png">
+    {% endif%}
+                            <div class="card-body">
+
+                                <h2 class="card-title h4">{{ p.name }}</h2>
+{% if p.category %}
+                                <span class="badge badge-secondary">{{ p.category }}</span>
+        {% else %}
+                                <span class="badge badge-secondary"> Unknown</span>
+    {% endif %}
+                                <p class="card-text">포지션: {{p.position}} <br> 구단명: {{p.team_name}}</p>
+
+                                <a class="btn btn-primary" href="{{ p.get_absolute_url }}">상세 정보 →</a>
+                            </div>
+                        </div>
+                    </div>
+{% endfor%}
+{% else %}
+<p>아무도 없음</p>
+
+{% endif %}
+                    </div>
+{% endblock %}

@@ -1,9 +1,56 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from .models import Player, Category, Team
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-
-
+from django import forms
+from . import models
 #CBV 방식
+class SearchForm(forms.Form):
+    '''Search Form Definition'''
+    name = forms.CharField(required=False)
+    shoot_rate = forms.IntegerField(required=False)
+    shoot_rate_lte = forms.IntegerField(required=False)
+    position = forms.CharField(required=False)
+    nationality = forms.CharField(required=False)
+    team_type = forms.ModelChoiceField(
+        empty_label="Any Kind", queryset=models.Team.objects.all(), required=False
+    )
+def search(request):
+    #  request.GET를 통해 모든 값을 기억
+
+    form = SearchForm(request.GET)
+    if form.is_valid():
+        player_name = form.cleaned_data.get("name")
+        shoot_rate = form.cleaned_data.get("shoot_rate")
+        shoot_rate_lte = form.cleaned_data.get("shoot_rate_lte");
+        position = form.cleaned_data.get("position")
+        nationality = form.cleaned_data.get("nationality")
+        team_type = form.cleaned_data.get("team_type")
+
+        #search argument
+        filter_args = {}
+        if player_name != '':
+            print('player not none')
+            filter_args["name"] = player_name
+        if position != '':
+            print('position not none')
+            filter_args["position"] = position
+        if nationality != '':
+            print('nationality not none')
+            filter_args["nationality"] = nationality
+        if team_type is not None:
+            print(team_type)
+            filter_args["team_name_id"] = team_type
+        if shoot_rate is not None:
+            filter_args["shoot_success_rate__gte"] = shoot_rate
+        if shoot_rate_lte is not None:
+            filter_args["shoot_success_rate__lte"] = shoot_rate_lte
+
+        player = models.Player.objects.filter(**filter_args)
+
+    context = {"form": form, "player":player}
+    return render(request, 'main_page/search.html', context)
+
+
 class CardDelete(DeleteView):
     model = Player
     success_url = '/main_page/' # 성공시 돌아갈 링크
