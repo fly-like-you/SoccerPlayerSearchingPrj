@@ -1,0 +1,1 @@
+web: gunicorn soccer_django_prj.wsgi --log-file -

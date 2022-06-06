@@ -1,3 +1,4 @@
+import os
 
 DATABASES = {
     'default': {
@@ -9,4 +10,4 @@ DATABASES = {
         'PORT': '3306',                             # 포트 번호
     }
 }
-SECRET_KEY = 'django-insecure-9hh7)3muc5^+u@_)7f-==dx1s1hmjbn9j3+1pe^%h&5n(88=i9'
+SECRET_KEY = os.environ.get('SECRET_KEY','django-insecure-9hh7)3muc5^+u@_)7f-==dx1s1hmjbn9j3+1pe^%h&5n(88=i9')
