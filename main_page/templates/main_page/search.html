@@ -1,16 +1,16 @@
 {% extends 'main_page/base_full_width.html' %}
 {% block head_title %} Search Card - SoccerDB {% endblock %}
+{% block style_block %} #id_name{width: 200px;}{% endblock %}
 
 {% block main_area %}
-    <h1>Search your Player!</h1>
+    <h1>선수 검색</h1>
     <form method="get"  action="{% url "player:search" %}">
         {{form}}
-<br>
-        <button class="btn btn-outline-primary btn-circle">Search</button>
+        <br>
+        <br>
+        <button class="btn btn-outline-primary btn-circle float-right">Search</button>
     </form>
-<div class="spinner-border" role="status">
-  <span class="visually-hidden"></span>
-</div>
+
                 <div class="row">
 {% if player %}
 {% for p in player %}
@@ -37,8 +37,25 @@
                     </div>
 {% endfor%}
 {% else %}
-<p>아무도 없음</p>
+
+<div class="container text-center m-5"><h2>검색결과가 존재하지 않습니다. 다시 검색해주세요.</h2></div>
 
 {% endif %}
                     </div>
 {% endblock %}
+
+{% block script_block %}
+<!-- placeholder -->
+inputID = document.querySelector('#id_name'); inputID.placeholder = '이름을 입력해주세요';
+shootID = document.querySelector('#id_shoot_rate'); shootID.placeholder = '슛 성공률 최솟값';
+shootLteID = document.querySelector('#id_shoot_rate_lte'); shootLteID.placeholder = '슛 성공률 최댓값';
+
+
+<!-- bootstrap style -->
+comboInput = document.querySelector('#id_team_type'); comboInput.className += 'custom-select';
+inputs = document.querySelectorAll('input');
+for (let element of inputs) {
+    element.className += 'form-control';
+}
+
+{%  endblock %}

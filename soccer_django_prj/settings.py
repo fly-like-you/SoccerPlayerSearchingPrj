@@ -17,9 +17,8 @@ import mimetypes
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-mimetypes.add_type("application/javascript", ".js", True)
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
+#mimetypes.add_type("application/javascript", ".js", True)
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = my_settings.SECRET_KEY
@@ -42,7 +41,7 @@ INSTALLED_APPS = [
     'main_page',
     'single_pages',
     'django_extensions',
-    'debug_toolbar',
+    #'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -53,10 +52,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
 
 ]
-INTERNAL_IPS = ('127.0.0.1', '203.255.57.227')
+#INTERNAL_IPS = ('127.0.0.1', '203.255.57.227')
 ROOT_URLCONF = 'soccer_django_prj.urls'
 
 TEMPLATES = [

@@ -32,47 +32,13 @@
                             </div>
                         </div>
                     </div>
-{% endfor%}
-                    <!-- Pagination -->
-                    {% if is_paginated %}
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-center">
-                            {% if page_obj.has_previous %}
-                            <li class="page-item">
-                                <a class="page-link" href="?&page={{ page_obj.previous_page_number }}">이전</a>
 
-                            </li>
-                            {% else %}
-                            <li class="page-item disabled">
-                                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
-                            </li>
-                            {% endif %}
-                            {% for page_number in page_obj.paginator.page_range %}
-                            {% if page_number == page_obj.number %}
-                            <li class="page-item active" aria-current="page">
-                                <a class="page-link" href="?&page={{ page_number }}">{{ page_number }}</a>
-                            </li>
-                            {% else %}
-                            <li class="page-link">
-                                <a class="page-item" href="?&page={{ page_number }}">{{ page_number }}</a>
-                            </li>
-                            {% endif %}
-                            {% endfor %}
-                            {% if page_obj.has_next %}
-                            <li class="page-item">
-                                <a class="page-link" href="?&page={{ page_obj.next_page_number }}">다음</a>
-                            </li>
-                            {% else %}
-                            <li class="page-item disabled">
-                                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
-                            </li>
-                            {% endif %}
-                      </ul>
-                    </nav>
-                    {% endif %}
+{% endfor%}
+
 {% else %}
                     <h3> 선수 명단이 존재하지 않습니다. </h3>
 {% endif%}
+{% include 'main_page/pagination.html' %}
                 </div>
 
 {% endblock %}

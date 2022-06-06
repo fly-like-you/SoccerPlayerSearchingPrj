@@ -3,6 +3,7 @@ from .models import Player, Category, Team
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django import forms
 from . import models
+from django.core.paginator import Paginator
 #CBV 방식
 class SearchForm(forms.Form):
     '''Search Form Definition'''
@@ -16,7 +17,6 @@ class SearchForm(forms.Form):
     )
 def search(request):
     #  request.GET를 통해 모든 값을 기억
-
     form = SearchForm(request.GET)
     if form.is_valid():
         player_name = form.cleaned_data.get("name")
@@ -45,8 +45,7 @@ def search(request):
         if shoot_rate_lte is not None:
             filter_args["shoot_success_rate__lte"] = shoot_rate_lte
 
-        player = models.Player.objects.filter(**filter_args)
-
+    player = models.Player.objects.filter(**filter_args)
     context = {"form": form, "player":player}
     return render(request, 'main_page/search.html', context)
 
