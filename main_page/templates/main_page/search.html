@@ -4,8 +4,8 @@
 
 {% block main_area %}
     <h1>선수 검색</h1>
-    <hr>
-    <h3>무료 서버 특성상 속도가 원활하지 않아 이미지는 검색되지 않습니다.</h3>
+    <br><hr>
+    <p>무료 서버 특성상 속도가 원활하지 않아 검색이 원할하지 않습니다.</p>
     <form method="get"  action="{% url "player:search" %}">
         {{form}}
         <br>
@@ -19,8 +19,11 @@
                     <div class="col-sm-3">
                         <div style="width: 200px" class="card m-4" id="card-{{ p.pk }}">
 
-                            <!--<img style="height: 264px" class = "card-img-top" src="https://portal.kleague.com/images/portal/img-nonepicture-userprofil.png">-->
-
+    {% if p.head_image %}
+                            <a href="#!" ><img class="card-img-top"  src="{{ p.head_image.url }}" alt="{{ p }} head image" /></a>
+        {% else %}
+                            <img style="height: 264px" class = "card-img-top" src="https://portal.kleague.com/images/portal/img-nonepicture-userprofil.png">
+    {% endif%}
                             <div class="card-body">
 
                                 <h2 class="card-title h4">{{ p.name }}</h2>
